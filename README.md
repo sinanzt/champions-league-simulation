@@ -1,7 +1,6 @@
 # Championships League Simulation
 
-Champions League Simulation: In this project, we expect you to complete a
-simulation.
+Champions League Simulation
 
 ## Installation
 
