@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->text('imageUrl');
             $table->integer('attackRating')->default(0);
             $table->integer('midfieldRating')->default(0);
             $table->integer('defenceRating')->default(0);

@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Traits\BelongsToSimulation;
 
 class Fixture extends Model
 {
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
+    use BelongsToSimulation;
+    use HasFactory;
+
     protected $fillable = [
         'simulation_id',
         'week',
@@ -22,31 +23,16 @@ class Fixture extends Model
         'played_at'
     ];
 
-    /**
-     * Define Relation with Team Model (Host)
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function host(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'host_fc_id');
     }
 
-    /**
-     * Define Relation with Team Model (Guest)
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
     public function guest(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'guest_fc_id');
     }
 
-    /**
-     * Check if fixture is played.
-     * 
-     * @return bool
-     */
     public function isPlayed(): bool
     {
         return $this->played_at !== null;
