@@ -13,8 +13,8 @@ class Team extends Model
     protected $fillable = [
         'name',
         'slug',
-        'attackRating',
-        'midfieldRating',
-        'defenceRating',
+        'attack_rating',
+        'midfield_rating',
+        'defence_rating',
     ];
 }

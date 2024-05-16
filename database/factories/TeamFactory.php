@@ -14,9 +14,9 @@ class TeamFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'slug' => $this->faker->unique()->userName(),
-            'attackRating' => $this->faker->numberBetween(70, 100),
-            'midfieldRating' => $this->faker->numberBetween(70, 100),
-            'defenceRating' => $this->faker->numberBetween(70, 100),
+            'attack_rating' => $this->faker->numberBetween(70, 100),
+            'midfield_rating' => $this->faker->numberBetween(70, 100),
+            'defence_rating' => $this->faker->numberBetween(70, 100),
         ];
     }
 }

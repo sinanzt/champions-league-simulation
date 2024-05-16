@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Team;
 use App\Actions\Simulation\CreateNewSimulation;
+use App\Repositories\TeamRepository;
 
 class HomeController extends Controller
 {
+    public function __construct(
+        public TeamRepository $teamRepository,
+    ){}
+
     public function index()
     {
-        $teams = Team::all();
+        $teams = $this->teamRepository->getTeams();
 
         return view('home', ['teams' => $teams]);
     }

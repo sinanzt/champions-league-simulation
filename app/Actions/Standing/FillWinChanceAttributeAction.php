@@ -5,10 +5,15 @@ namespace App\Actions\Standing;
 use App\Models\Simulation;
 use App\Traits\AsAction;
 use Illuminate\Support\Collection;
+use App\Repositories\StandingRepository;
 
 class FillWinChanceAttributeAction
 {
     use AsAction;
+
+    public function __construct(
+        public StandingRepository $standingRepository
+    ){}
 
     public function handle(Simulation $simulation, Collection $standings)
     {
@@ -16,7 +21,7 @@ class FillWinChanceAttributeAction
 
         $weeksLeft = 6 - $firstTeamStanding->played;
 
-        $unplayedFixtures = $simulation->getUnplayedFixtures();
+        $unplayedFixtures = $this->standingRepository->getUnplayedFixtures($simulation);
 
         $sumChance = 0;
 

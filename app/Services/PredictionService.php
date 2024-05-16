@@ -6,13 +6,13 @@ class PredictionService
 {
     public function predictScores($hostTeam, $guestTeam)
     {
-        $hostAttack = $hostTeam->attackRating;
-        $hostDefence = $hostTeam->defenceRating;
-        $hostMidfield = $hostTeam->midfieldRating;
+        $hostAttack = $hostTeam->attack_rating;
+        $hostDefence = $hostTeam->defence_rating;
+        $hostMidfield = $hostTeam->midfield_rating;
 
-        $guestAttack = $guestTeam->attackRating;
-        $guestDefence = $guestTeam->defenceRating;
-        $guestMidfield = $guestTeam->midfieldRating;
+        $guestAttack = $guestTeam->attack_rating;
+        $guestDefence = $guestTeam->defence_rating;
+        $guestMidfield = $guestTeam->midfield_rating;
 
         $hostPower = ($hostAttack * 1.5 + $hostMidfield + $hostDefence) / 3;
         $guestPower = ($guestAttack * 1.5 + $guestMidfield + $guestDefence) / 3;

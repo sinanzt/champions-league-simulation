@@ -23,13 +23,6 @@ class PlayWeekAction
         }
     }
 
-    /**
-     * Play the week of the fixture.
-     *
-     * @param \App\Models\Fixture $fixture
-     *
-     * @return void
-     */
     protected function playWeek(Fixture $fixture)
     {
         if (!$fixture->isPlayed()) {

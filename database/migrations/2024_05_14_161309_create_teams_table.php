@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->integer('attackRating')->default(0);
-            $table->integer('midfieldRating')->default(0);
-            $table->integer('defenceRating')->default(0);
+            $table->integer('attack_rating')->default(0);
+            $table->integer('midfield_rating')->default(0);
+            $table->integer('defence_rating')->default(0);
             $table->timestamps();
         });
     }

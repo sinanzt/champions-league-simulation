@@ -82,21 +82,37 @@ class FixtureService
         $teamsCount = $this->teams->count();
         $halfTeamCount = $teamsCount / 2;
         $rounds = $this->rounds ?? $teamsCount - 1;
+        
+        $lastWeekHome = [];
+
         for ($round = 1; $round <= $rounds; $round += 1) {
             $this->schedule[$round] = collect();
-            $this->teams->each(function ($team, $index) use ($halfTeamCount, $round) {
+
+            $this->teams->each(function ($team, $index) use ($halfTeamCount, $round, &$lastWeekHome) {
                 if ($index >= $halfTeamCount) {
                     return false;
                 }
+
                 $team1 = $team;
                 $team2 = $this->teams[$index + $halfTeamCount];
-                $matchup = $round % 2 === 0 ? collect(['round' => $round, 'host' => $team1, 'guest' => $team2]) : collect(['round' => $round, 'host' => $team2, 'guest' => $team1]);
+                
+                if(isset($lastWeekHome[$team1]) && $lastWeekHome[$team1]){
+                    $matchup = collect(['round' => $round, 'host' => $team2, 'guest' => $team1]);
+                    $lastWeekHome[$team1] = false;
+                } else {
+                    $matchup = collect(['round' => $round, 'host' => $team1, 'guest' => $team2]);
+                    $lastWeekHome[$team1] = true;
+                }
+
                 $this->schedule[$round]->push($matchup);
             });
+            
             $this->rotate();
         }
+
         return $this;
     }
+
 
     protected function rotate(): FixtureService
     {

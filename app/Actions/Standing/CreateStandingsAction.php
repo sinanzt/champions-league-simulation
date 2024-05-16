@@ -3,25 +3,24 @@
 namespace App\Actions\Standing;
 
 use App\Models\Simulation;
-use App\Models\Team;
 use App\Traits\AsAction;
+use App\Repositories\TeamRepository;
+use App\Repositories\StandingRepository;
 
 class CreateStandingsAction
 {
     use AsAction;
 
+    public function __construct(
+        public TeamRepository $teamRepository,
+        public StandingRepository $standingRepository
+    ){}
+
     public function handle(Simulation $simulation)
     {
-        $teams = Team::all();
+        $teams = $this->teamRepository->getTeams();
         foreach ($teams as $team) {
-            $simulation->standings()->create([
-                'team_id' => $team->id,
-                'points' => 0,
-                'played' => 0,
-                'won' => 0,
-                'lost' => 0,
-                'draw' => 0,
-            ]);
+            $this->standingRepository->createStanding($simulation, $team->id);
         }
     }
 }
