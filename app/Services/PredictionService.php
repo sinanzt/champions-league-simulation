@@ -31,7 +31,7 @@ class PredictionService
         ];
     }
 
-    private function calculateWinProbability($teamPower, $opponentPower, $isHost)
+    public function calculateWinProbability($teamPower, $opponentPower, $isHost)
     {
         // Add 10% to win probability if the team is host
         $winProbability = $teamPower / ($teamPower + $opponentPower);
@@ -41,7 +41,7 @@ class PredictionService
         return $winProbability;
     }
 
-    private function predictGoals($teamPower, $winProbability)
+    public function predictGoals($teamPower, $winProbability)
     {
         // Predict a random number of goals based on team power
         // Higher power means higher probability of scoring goals
