@@ -16,7 +16,7 @@ Champions League Simulation
     php artisan migrate --seed
 ```
 
-## Running up the project
+## Running up the back-end project
 
 ```bash
     php artisan serve
@@ -29,7 +29,11 @@ Champions League Simulation
     npm install
 ```
 
-After editing any frontend file, you need to run `npm run dev`, or `npm run prod` to see the changes.
+## Running up the front-end project
+
+```bash
+    npm run dev
+```
 
 ## Tests
 
