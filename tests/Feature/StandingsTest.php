@@ -19,9 +19,13 @@ class StandingsTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee($simulation->uid);
 
-        $response->assertViewHas('standings');
-        $response->assertViewHas('nextFixture');
-        $response->assertViewHas('lastPlayedFixture');
-        $response->assertViewHas('simulationUid', $simulation->uid);
+        $response->assertStatus(200)
+            ->assertInertia(function (Assert $page) use ($simulation) {
+                $page->component('Standings')
+                    ->has('standings')
+                    ->has('nextFixture')
+                    ->has('lastPlayedFixture')
+                    ->where('simulationUid', $simulation->uid);
+            });
     }
 }

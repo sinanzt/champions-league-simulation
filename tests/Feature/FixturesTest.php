@@ -11,11 +11,6 @@ class FixturesTest extends TestCase
 {
     use RefreshDatabase;
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function test_fixtures_page()
     {
         $simulation = Simulation::factory()->create();
@@ -25,7 +20,11 @@ class FixturesTest extends TestCase
 
         $response->assertSee($simulation->uid);
 
-        $response->assertViewHas('fixtures');
-        $response->assertViewHas('simulationUid', $simulation->uid);
+        $response->assertStatus(200)
+            ->assertInertia(function (Assert $page) use ($simulation) {
+                $page->component('Fixtures')
+                    ->has('fixtures')
+                    ->where('simulationUid', $simulation->uid);
+            });
     }
 }

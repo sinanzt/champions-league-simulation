@@ -20,13 +20,13 @@ class StandingController extends Controller
         $standings = FillWinChanceAttributeAction::run($simulation, $simulation->standings);
         $standings = StandingResource::collection($standings);
 
-        $nextFixture = $this->simulationRepository->getNextFixture($simulation);
+        $nextFixtureData = $this->simulationRepository->getNextFixture($simulation);
         $lastPlayedFixture = $this->simulationRepository->getLastPlayedFixture($simulation);
 
-        $groupedNextFixture = FixtureResource::collection($nextFixture)->collection->groupBy('week');
+        $nextFixture = FixtureResource::collection($nextFixtureData)->collection->groupBy('week');
         $lastPlayedFixture = FixtureResource::collection($lastPlayedFixture)->collection->groupBy('week');
         $simulationUid = $simulation->uid;
 
-        return view('simulation', ['standings' => $standings, 'nextFixture' => $groupedNextFixture, 'lastPlayedFixture' => $lastPlayedFixture, 'simulationUid' => $simulationUid]);
+        return Inertia::render('Standings', compact('standings', 'nextFixture', 'lastPlayedFixture', 'simulationUid'));
     }
 }

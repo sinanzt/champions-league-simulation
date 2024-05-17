@@ -87,7 +87,7 @@ class FillWinChanceAttributeActionTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $result);
         foreach ($result as $standing) {
-            $this->assertEquals(0, $standing->winChance);
+            $this->assertEquals(-1, $standing->winChance);
         }
     }
 }

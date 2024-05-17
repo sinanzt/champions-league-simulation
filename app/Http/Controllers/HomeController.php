@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\Simulation\CreateNewSimulation;
 use App\Repositories\TeamRepository;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
@@ -15,7 +16,7 @@ class HomeController extends Controller
     {
         $teams = $this->teamRepository->getTeams();
 
-        return view('home', ['teams' => $teams]);
+        return Inertia::render('Home', compact('teams'));
     }
 
     public function generateSimulation()
