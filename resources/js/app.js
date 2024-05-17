@@ -5,7 +5,7 @@ import { createInertiaApp, Link } from "@inertiajs/vue3";
 import Layout from "./Layouts/Layout.vue";
 
 createInertiaApp({
-    title: (title) => `My App ${title}`,
+    title: (title) => `Champions League Simulation ${title}`,
     resolve: (name) => {
         const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
         let page = pages[`./Pages/${name}.vue`];
